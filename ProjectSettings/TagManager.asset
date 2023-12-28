@@ -52,3 +52,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 2163940039
+    locked: 0
+  - name: Fence
+    uniqueID: 2386444973
+    locked: 0
+  - name: Blocks
+    uniqueID: 698585975
+    locked: 0
+  - name: Player
+    uniqueID: 2000828577
+    locked: 0

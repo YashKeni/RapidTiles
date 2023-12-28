@@ -19,8 +19,8 @@ public class Player : MonoBehaviour
     void Awake()
     {
         tileColor = showBlock.GetComponent<TileColor>();
-        scoreText.text = "0";
-        livesText.text = "3";
+        scoreText.text = "Score: 0";
+        livesText.text = "3 :Lives";
     }
 
 
@@ -43,11 +43,11 @@ public class Player : MonoBehaviour
     {
         if (isSame == true && tileColor.isDefault == true)
         {
-            scoreText.text = Scorer().ToString();
+            scoreText.text = "Score: " + Scorer().ToString();
         }
         if (isSame == false && tileColor.isDefault == true)
         {
-            livesText.text = Health().ToString();
+            livesText.text = Health().ToString() + " :Lives";
         }
     }
 
