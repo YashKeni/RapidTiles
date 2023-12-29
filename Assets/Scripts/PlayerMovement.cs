@@ -21,17 +21,23 @@ public class PlayerMovement : MonoBehaviour
     Vector2 rawInput;
     Vector2 joystickVec;
     Rigidbody2D myRigidBody2D;
+    Animator animator;
 
 
     void Start()
     {
         myRigidBody2D = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
     {
         Move();
         joystickVec = new Vector2(joystick.Horizontal, joystick.Vertical);
+
+        animator.SetFloat("Horizontal", joystickVec.x);
+        animator.SetFloat("Vertical", joystickVec.y);
+        animator.SetFloat("Speed", joystickVec.sqrMagnitude);
     }
 
     private void Move()
