@@ -13,12 +13,21 @@ public class Player : MonoBehaviour
     [SerializeField] int scoreIncrement = 100;
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] TextMeshProUGUI livesText;
+
+    [Header("SFX")]
+    [SerializeField] AudioClip scoreSFX;
+    [SerializeField] AudioClip lifeSFX;
+
     TileColor tileColor;
+    AudioSource audioSource;
+
     bool isSame;
 
     void Awake()
     {
         tileColor = showBlock.GetComponent<TileColor>();
+        audioSource = GetComponent<AudioSource>();
+
         scoreText.text = "Score: 0";
         livesText.text = "3 :Lives";
     }
@@ -54,12 +63,14 @@ public class Player : MonoBehaviour
     public int Scorer()
     {
         score += scoreIncrement;
+        audioSource.PlayOneShot(scoreSFX);
         return score;
     }
 
     public int Health()
     {
         lives--;
+        audioSource.PlayOneShot(lifeSFX);
         if (lives <= 0)
         {
             StartCoroutine(GameOverDelay());
