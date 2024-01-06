@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 2000828577
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0f39a9205e4394ee1b6ba8269428d176, type: 3}
+  m_Sprite: {fileID: -1599933082, guid: b4754973337c92545adc6aa5bb0d2dd2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -106,8 +106,6 @@ MonoBehaviour:
   showBlock: {fileID: 0}
   gameOverDelay: 1
   scoreIncrement: 100
-  scoreText: {fileID: 0}
-  livesText: {fileID: 0}
   scoreSFX: {fileID: 8300000, guid: 0c008ee3ee72a4362a35be25fa5de043, type: 3}
   lifeSFX: {fileID: 8300000, guid: cf6c0e7fbef9449c98a0cdb5ea0c4d9f, type: 3}
 --- !u!114 &9179927503743243915
@@ -123,10 +121,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  minX: -9
-  maxX: 9
-  minY: -2.5
-  maxY: 4
+  minX: -9.5
+  maxX: 9.5
+  minY: -3.5
+  maxY: 3.5
   joystick: {fileID: 0}
 --- !u!114 &5328810155336824430
 MonoBehaviour:
@@ -190,9 +188,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.5}
+  m_Offset: {x: 0, y: -0.6}
   serializedVersion: 2
-  m_Radius: 0.05
+  m_Radius: 0.01
 --- !u!50 &7286652431816165637
 Rigidbody2D:
   serializedVersion: 4
