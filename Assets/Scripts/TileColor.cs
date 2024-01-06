@@ -31,14 +31,10 @@ public class TileColor : MonoBehaviour
     {
         while (gameSession.GetLives() > 0)
         {
-            if (playerManager.nameEntered)
-            {
-                DefaultColor();
-                yield return new WaitForSeconds(defaultToRandom);
-                RandomColor();
-                yield return new WaitForSeconds(randomToDefault);
-            }
-
+            DefaultColor();
+            yield return new WaitForSeconds(defaultToRandom);
+            RandomColor();
+            yield return new WaitForSeconds(randomToDefault);
         }
     }
 
