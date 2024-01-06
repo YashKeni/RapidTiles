@@ -7,12 +7,8 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     [SerializeField] GameObject showBlock;
-    int score = 0;
-    int lives = 3;
     [SerializeField] int gameOverDelay = 2;
     [SerializeField] int scoreIncrement = 100;
-    [SerializeField] TextMeshProUGUI scoreText;
-    [SerializeField] TextMeshProUGUI livesText;
 
     [Header("SFX")]
     [SerializeField] AudioClip scoreSFX;
@@ -20,6 +16,9 @@ public class Player : MonoBehaviour
 
     TileColor tileColor;
     AudioSource audioSource;
+    GameSession gameSession;
+    Leaderboard leaderboard;
+    CanvasManager canvasManager;
 
     bool isSame;
 
@@ -27,11 +26,18 @@ public class Player : MonoBehaviour
     {
         tileColor = showBlock.GetComponent<TileColor>();
         audioSource = GetComponent<AudioSource>();
-
-        scoreText.text = "Score: 0";
-        livesText.text = "3 :Lives";
+        gameSession = FindObjectOfType<GameSession>();
+        leaderboard = FindObjectOfType<Leaderboard>();
+        canvasManager = FindObjectOfType<CanvasManager>();
     }
 
+    private void Update()
+    {
+        if (gameSession.GetLives() <= 0)
+        {
+            StartCoroutine(GameOverDelay());
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -52,44 +58,22 @@ public class Player : MonoBehaviour
     {
         if (isSame == true && tileColor.isDefault == true)
         {
-            scoreText.text = "Score: " + Scorer().ToString();
+            gameSession.AddToScore(scoreIncrement);
+            audioSource.PlayOneShot(scoreSFX);
         }
         if (isSame == false && tileColor.isDefault == true)
         {
-            livesText.text = Health().ToString() + " :Lives";
+            gameSession.DecreaseLives(1);
+            audioSource.PlayOneShot(lifeSFX);
         }
-    }
-
-    public int Scorer()
-    {
-        score += scoreIncrement;
-        audioSource.PlayOneShot(scoreSFX);
-        return score;
-    }
-
-    public int Health()
-    {
-        lives--;
-        audioSource.PlayOneShot(lifeSFX);
-        if (lives <= 0)
-        {
-            StartCoroutine(GameOverDelay());
-        }
-        return lives;
     }
 
     IEnumerator GameOverDelay()
     {
         yield return new WaitForSeconds(gameOverDelay);
-        LoadNextScene();
+        int finalScore = gameSession.GetScore();
+        yield return leaderboard.SubmitScoreRoutine(finalScore);
+
+        canvasManager.ShowFinalScoreCanvas();
     }
-
-    public void LoadNextScene()
-    {
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(currentSceneIndex + 1);
-    }
-
-
-
 }

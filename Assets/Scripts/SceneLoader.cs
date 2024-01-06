@@ -17,9 +17,17 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene(currentSceneIndex - 1);
     }
 
+    public void StartGameScene()
+    {
+        SceneManager.LoadScene("Core Game");
+        FindObjectOfType<GameSession>().ResetGame();
+    }
+
     public void LoadStartScene()
     {
+        Debug.Log("Hello");
         SceneManager.LoadScene(0);
+        FindObjectOfType<GameSession>().ResetGame();
     }
 
     public void LoadHowToScene()

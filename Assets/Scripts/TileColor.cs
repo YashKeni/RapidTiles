@@ -10,14 +10,18 @@ public class TileColor : MonoBehaviour
     public bool isDefault;
     public List<Color> TintColors;
 
+    GameSession gameSession;
+
     void Start()
     {
+        gameSession = FindObjectOfType<GameSession>();
+
         StartCoroutine(SwitchDefaultAndRandom());
     }
 
     IEnumerator SwitchDefaultAndRandom()
     {
-        while (true)
+        while (gameSession.GetLives() > 0)
         {
             DefaultColor();
             yield return new WaitForSeconds(defaultToRandom);
