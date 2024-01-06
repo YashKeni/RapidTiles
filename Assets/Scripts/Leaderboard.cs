@@ -28,7 +28,7 @@ public class Leaderboard : MonoBehaviour
             }
             else
             {
-                Debug.Log("Failed: " + response.errorData);
+                Debug.Log("Failed: " + response.errorData.message);
                 done = true;
             }
         });
@@ -67,7 +67,7 @@ public class Leaderboard : MonoBehaviour
             }
             else
             {
-                Debug.Log("Failed: " + response.errorData);
+                Debug.Log("Failed: " + response.errorData.message);
                 done = true;
             }
         });

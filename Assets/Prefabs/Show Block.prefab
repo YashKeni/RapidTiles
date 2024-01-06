@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48086280b3e325245951ce807ee5ce95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  randomToDefault: 3
+  randomToDefault: 5
   defaultToRandom: 2
   isDefault: 0
   TintColors:

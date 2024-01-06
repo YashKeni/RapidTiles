@@ -5,28 +5,40 @@ using UnityEngine;
 [RequireComponent(typeof(Renderer))]
 public class TileColor : MonoBehaviour
 {
-    [SerializeField] public float randomToDefault = 4f;
+    [SerializeField] public float randomToDefault = 5f;
     [SerializeField] float defaultToRandom = 3f;
     public bool isDefault;
     public List<Color> TintColors;
+    int currentScore;
 
     GameSession gameSession;
+    PlayerManager playerManager;
 
     void Start()
     {
         gameSession = FindObjectOfType<GameSession>();
+        playerManager = FindObjectOfType<PlayerManager>();
 
         StartCoroutine(SwitchDefaultAndRandom());
+    }
+
+    private void Update()
+    {
+        DifficultyStatus();
     }
 
     IEnumerator SwitchDefaultAndRandom()
     {
         while (gameSession.GetLives() > 0)
         {
-            DefaultColor();
-            yield return new WaitForSeconds(defaultToRandom);
-            RandomColor();
-            yield return new WaitForSeconds(randomToDefault);
+            if (playerManager.nameEntered)
+            {
+                DefaultColor();
+                yield return new WaitForSeconds(defaultToRandom);
+                RandomColor();
+                yield return new WaitForSeconds(randomToDefault);
+            }
+
         }
     }
 
@@ -91,6 +103,28 @@ public class TileColor : MonoBehaviour
         GetComponent<Renderer>().material.color = new Color(1, 1, 1, 1);
         gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
         gameObject.tag = "White";
+    }
+
+    public void DifficultyStatus()
+    {
+        currentScore = gameSession.GetScore();
+        switch (currentScore)
+        {
+            case int n when (n >= 100 && n < 200):
+                Debug.Log("Speed Increased 1");
+                randomToDefault = 4f;
+                break;
+
+            case int n when (n >= 200 && n < 300):
+                Debug.Log("Speed Increased 2");
+                randomToDefault = 3f;
+                break;
+
+            case int n when (n >= 300 && n < 400):
+                Debug.Log("Speed Increased 3");
+                randomToDefault = 2f;
+                break;
+        }
     }
 
     void SetTriggerActive()
