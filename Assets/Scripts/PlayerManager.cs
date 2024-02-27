@@ -7,32 +7,12 @@ using TMPro;
 public class PlayerManager : MonoBehaviour
 {
     public Leaderboard leaderboard;
-    public TMP_InputField playerNameInputField;
-    public GameObject nameInputPanel;
 
-    public bool nameEntered;
-
-    void Start()
+    void Awake()
     {
         StartCoroutine(SetupRoutine());
     }
 
-    public void SetPlayerName()
-    {
-        LootLockerSDKManager.SetPlayerName(playerNameInputField.text, (response) =>
-        {
-            if (response.success)
-            {
-                Debug.Log("Successfully Set Player Name");
-                nameInputPanel.SetActive(false);
-                nameEntered = true;
-            }
-            else
-            {
-                Debug.Log("Could not set Player Name: " + response.errorData.message);
-            }
-        });
-    }
 
     IEnumerator SetupRoutine()
     {
@@ -40,7 +20,7 @@ public class PlayerManager : MonoBehaviour
         yield return leaderboard.FetchTopHighScoreRoutine();
     }
 
-    IEnumerator LoginRoutine()
+    public IEnumerator LoginRoutine()
     {
         bool done = false;
         LootLockerSDKManager.StartGuestSession((response) =>

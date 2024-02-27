@@ -23,6 +23,11 @@ public class SceneLoader : MonoBehaviour
         FindObjectOfType<GameSession>().ResetGame();
     }
 
+    public void StartGameSceneFromMenu()
+    {
+        SceneManager.LoadScene("Core Game");
+    }
+
     public void LoadStartScene()
     {
         SceneManager.LoadScene(0);
@@ -31,7 +36,7 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadHowToScene()
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene("How To Play");
     }
 
     public void QuitGame()

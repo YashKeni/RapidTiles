@@ -25,6 +25,7 @@ public class Leaderboard : MonoBehaviour
             {
                 Debug.Log("Score uploaded successfully");
                 done = true;
+                Debug.Log(done);
             }
             else
             {
@@ -38,7 +39,7 @@ public class Leaderboard : MonoBehaviour
     public IEnumerator FetchTopHighScoreRoutine()
     {
         bool done = false;
-        LootLockerSDKManager.GetScoreList(leadeboardKey, 10, 0, (response) =>
+        LootLockerSDKManager.GetScoreList(leadeboardKey.ToString(), 10, 0, (response) =>
         {
             if (response.success)
             {

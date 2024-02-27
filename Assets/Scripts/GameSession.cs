@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameSession : MonoBehaviour
 {
     int score = 0;
-    int lives = 3;
+    int lives = 1;
 
     private void Awake()
     {
